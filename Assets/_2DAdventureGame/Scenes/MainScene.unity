@@ -73582,6 +73582,8 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   moveSpeed: 0.03
+  rightMotorSpeed: 0.01
+  leftMotorSpeed: 0.01
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
