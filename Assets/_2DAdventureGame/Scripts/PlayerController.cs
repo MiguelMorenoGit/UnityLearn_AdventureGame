@@ -6,13 +6,23 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
     public InputAction MoveAction; // Input action for moving
+    //public int frameRate = 60; // Desired frame rate for the game
 
-    [SerializeField, Range(0f, 0.1f)] private float moveSpeed = 0.05f;
+    [SerializeField, Range(0f, 10f)] private float moveSpeed = 3f;
     [SerializeField, Range(0f, 0.3f)] private float rightMotorSpeed = 0.1f;
     [SerializeField, Range(0f, 0.3f)] private float leftMotorSpeed = 0.1f;
 
 
     // Start is called before the first frame update
+
+    private void Start()
+    {
+        //QualitySettings.vSyncCount = 0;
+
+        //Application.targetFrameRate = frameRate;
+    }
+
+    // This method is called when the object becomes enabled and active
     private void OnEnable()
     {
         MoveAction.Enable();
@@ -35,7 +45,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(move);
 
         // Calculate the new position based on input and move speed
-        Vector2 position = (Vector2)transform.position + move * moveSpeed;
+        Vector2 position = (Vector2)transform.position + move * moveSpeed * Time.deltaTime;
 
         transform.position = position; // Move the player based on input
 
