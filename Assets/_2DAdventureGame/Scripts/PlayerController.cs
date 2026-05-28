@@ -6,6 +6,8 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
     public InputAction MoveAction; // Input action for moving
+    Rigidbody2D rigidBody2d;
+    Vector2 move;
     //public int frameRate = 60; // Desired frame rate for the game
 
     [SerializeField, Range(0f, 10f)] private float moveSpeed = 3f;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
         //QualitySettings.vSyncCount = 0;
 
         //Application.targetFrameRate = frameRate;
+        rigidBody2d = GetComponent<Rigidbody2D>();
     }
 
     // This method is called when the object becomes enabled and active
@@ -41,14 +44,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 move = MoveAction.ReadValue<Vector2>(); // Read the movement input
+        move = MoveAction.ReadValue<Vector2>(); // Read the movement input
         Debug.Log(move);
 
-        // Calculate the new position based on input and move speed
-        Vector2 position = (Vector2)transform.position + move * moveSpeed * Time.deltaTime;
+    }
 
-        transform.position = position; // Move the player based on input
+    private void FixedUpdate()
+    {
+        // Calculate the new position based on the current position, movement input, and move speed
+        Vector2 position = (Vector2)rigidBody2d.position + move * moveSpeed * Time.deltaTime;
 
+        rigidBody2d.MovePosition(position); // Move the player based on input
     }
 
     // This method is called when the MoveAction is performed or canceled
