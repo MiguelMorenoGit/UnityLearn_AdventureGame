@@ -5,12 +5,14 @@ public class HealthCollectible : MonoBehaviour
     public int healAmount = 1;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Health playerHealth = other.GetComponent<Health>();
+        Health otherHealth = other.GetComponent<Health>();
 
-        if (playerHealth != null)
+        if (otherHealth != null && otherHealth.health < otherHealth.maxHealth)
         {
-            playerHealth.ChangeHealth(healAmount);
+
+            otherHealth.ChangeHealth(healAmount);
             Destroy(gameObject);
+            
         }
     }
 }
