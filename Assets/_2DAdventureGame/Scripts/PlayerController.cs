@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         move = MoveAction.ReadValue<Vector2>(); // Read the movement input
-        Debug.Log(move);
 
     }
 
@@ -61,8 +60,6 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputAction.CallbackContext context)
     {
         Vector2 move = MoveAction.ReadValue<Vector2>(); // Read the movement input
-        Debug.Log($"Control usado: {context.control.path}");
-        Debug.Log($"Dispositivo: {context.control.device.displayName}");
 
         bool isLeftStick = context.control.path.Contains("leftStick");
 
