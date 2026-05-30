@@ -7,7 +7,12 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField, Range(0f, 10f)] private float moveSpeed = 3f;
+
+    ////////////////////////////////
     [SerializeField, Range(1, 5)] private int amountDamage = 2;
+    ////////////////////////////////
+    ///////////////////////////////////
+    ///////////////////////////////////
     [SerializeField] bool verticalMovement;
     Rigidbody2D rigidBody2d;
 
@@ -19,6 +24,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rigidBody2d = GetComponent<Rigidbody2D>();
+        ////////////////////////////////
         timer = changeTime;
     }
 
@@ -27,11 +33,12 @@ public class EnemyController : MonoBehaviour
     {
         timer -= Time.deltaTime;
 
-        if(timer < 0)
+        if (timer < 0)
         {
             direction = -direction;
             timer = changeTime;
         }
+        ////////////////////////////////
     }
 
     private void FixedUpdate()
@@ -41,6 +48,8 @@ public class EnemyController : MonoBehaviour
         // If verticalMovement is true, move the enemy vertically; otherwise, move it horizontally.
         if (verticalMovement) position.y = position.y + moveSpeed * Time.deltaTime * direction;
         else position.x = position.x + moveSpeed * Time.deltaTime * direction;
+        ////////////////////////////////
+        ///////////////////////////////////
 
         rigidBody2d.MovePosition(position);
     }
@@ -48,7 +57,16 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Health targetHealth = other.GetComponent<Health>();
+        ////////////////////////////////////////////////////////////////
+        ///////////////////////////////////
+        ///////////////////////////////////
 
         if (targetHealth != null) targetHealth.ChangeHealth(-amountDamage);
+        ////////////////////////////////
+        ///////////////////////////////////
     }
+    ////////////////////////////////////////////////////////////////
+    ///////////////////////////////////
+    ///////////////////////////////////
+
 }
